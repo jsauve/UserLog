@@ -1,9 +1,9 @@
 ﻿using System;
+using com.spectrum.UserLog.Core;
 using MvvmCross.Binding.BindingContext;
-using com.spectrum.UserLog.Core.ViewModels;
 using MvvmCross.Platforms.Ios.Views;
 
-namespace com.spectrum.UserLog.iOS.Views
+namespace com.spectrum.UserLog.iOS
 {
     [MvxFromStoryboard]
     public partial class FirstView : MvxViewController

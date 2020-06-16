@@ -68,4 +68,8 @@ Global
 		{8E079145-9289-4A78-83F0-10C70931171F}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
 		{8E079145-9289-4A78-83F0-10C70931171F}.AppStore|iPhone.Build.0 = AppStore|iPhone
 	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+	EndGlobalSection
 EndGlobal

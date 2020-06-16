@@ -1,7 +1,7 @@
 using Android.App;
 using Android.OS;
 
-namespace com.spectrum.UserLog.Droid.Views
+namespace com.spectrum.UserLog.Droid
 {
     [Activity(Label = "View for FirstViewModel")]
     public class FirstView : BaseView

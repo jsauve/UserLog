@@ -8,7 +8,7 @@
 using System.CodeDom.Compiler;
 using Foundation;
 
-namespace com.spectrum.UserLog.iOS.Views
+namespace com.spectrum.UserLog.iOS
 {
     [Register("FirstView")]
     partial class FirstView

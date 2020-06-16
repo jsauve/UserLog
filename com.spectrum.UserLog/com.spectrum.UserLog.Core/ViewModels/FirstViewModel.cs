@@ -1,6 +1,6 @@
 using MvvmCross.ViewModels;
 
-namespace com.spectrum.UserLog.Core.ViewModels
+namespace com.spectrum.UserLog.Core
 {
     public class FirstViewModel
         : MvxViewModel

@@ -2,7 +2,7 @@ using Android.OS;
 using Android.Support.V7.Widget;
 using MvvmCross.Droid.Support.V7.AppCompat;
 
-namespace com.spectrum.UserLog.Droid.Views
+namespace com.spectrum.UserLog.Droid
 {
     public abstract class BaseView : MvxAppCompatActivity
     {
