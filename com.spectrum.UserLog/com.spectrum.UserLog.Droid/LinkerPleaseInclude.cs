@@ -7,8 +7,7 @@ using MvvmCross.Binding.BindingContext;
 
 namespace com.spectrum.UserLog.Droid
 {
-    // This class is never actually executed, but when Xamarin linking is enabled it does how to ensure types and properties
-    // are preserved in the deployed app
+    // This class is never actually executed, but when linking is enabled, it ensures types and properties are preserved
     public class LinkerPleaseInclude
     {
         public void Include(Button button)
