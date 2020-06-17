@@ -1,15 +1,11 @@
 using MvvmCross.ViewModels;
+using PropertyChanged;
 
 namespace com.spectrum.UserLog.Core
 {
-    public class FirstViewModel
-        : MvxViewModel
+    [AddINotifyPropertyChangedInterface]
+    public class FirstViewModel : MvxViewModel
     {
-        string hello = "Hello MvvmCross";
-        public string Hello
-        {
-            get { return hello; }
-            set { SetProperty(ref hello, value); }
-        }
+        public string Hello { get; set; } = "Hello MvvmCross";
     }
 }

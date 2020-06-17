@@ -12,7 +12,7 @@ namespace com.spectrum.UserLog.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterAppStart<FirstViewModel>();
+            RegisterAppStart<UserCollectionViewModel>();
         }
     }
 }

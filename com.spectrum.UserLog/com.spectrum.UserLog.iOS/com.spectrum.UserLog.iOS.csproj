@@ -94,6 +94,19 @@
     <Compile Include="AppDelegate.cs" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\UserCollection\UserCollectionView.cs" />
+    <Compile Include="Views\UserCollection\UserCollectionView.designer.cs">
+      <DependentUpon>UserCollectionView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserDetail\UserDetailView.cs" />
+    <Compile Include="Views\UserDetail\UserDetailView.designer.cs">
+      <DependentUpon>UserDetailView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewSource\UserCollectionViewSource.cs" />
+    <Compile Include="Cells\UserCollection\UserCollectionViewCell.cs" />
+    <Compile Include="Cells\UserCollection\UserCollectionViewCell.designer.cs">
+      <DependentUpon>UserCollectionViewCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Setup.cs" />
@@ -105,6 +118,9 @@
       <SubType>Designer</SubType>
     </InterfaceDefinition>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
+    <InterfaceDefinition Include="Views\UserCollection\UserCollectionView.xib" />
+    <InterfaceDefinition Include="Views\UserDetail\UserDetailView.xib" />
+    <InterfaceDefinition Include="Cells\UserCollection\UserCollectionViewCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -191,6 +207,13 @@
       <Project>{CB0063FF-556C-471A-B342-DE066F762280}</Project>
       <Name>com.spectrum.UserLog.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\UserCollection\" />
+    <Folder Include="Views\UserDetail\" />
+    <Folder Include="ViewSource\" />
+    <Folder Include="Cells\" />
+    <Folder Include="Cells\UserCollection\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
