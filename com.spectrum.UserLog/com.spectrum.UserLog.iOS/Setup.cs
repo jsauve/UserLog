@@ -23,9 +23,8 @@ namespace com.spectrum.UserLog.iOS
         {
             base.InitializeLastChance();
 
-            //var registry = Mvx.IoCProvider.Resolve<IMvxTargetBindingFactoryRegistry>();
-
-            //registry.RegisterFactory(new MvxCustomBindingFactory<UIViewController>("NetworkIndicator", (viewController) => new NetworkIndicatorTargetBinding(viewController)));
+            var registry = Mvx.IoCProvider.Resolve<IMvxTargetBindingFactoryRegistry>();
+            registry.RegisterFactory(new MvxCustomBindingFactory<UIViewController>("NetworkIndicator", (viewController) => new NetworkIndicatorTargetBinding(viewController)));
         }
 
         protected override IMvxApplication CreateApp()

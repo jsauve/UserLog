@@ -10,7 +10,18 @@ namespace com.spectrum.UserLog.Core
         public bool IsBusy { get; set; }
         public bool IsRefreshing { get; set; }
 
-        public BaseViewModel()
+        protected BaseViewModel()
+        {
+        }
+    }
+
+    [AddINotifyPropertyChangedInterface]
+    public abstract class BaseViewModel<TParameter, TResult> : MvxViewModel<TParameter, TResult> where TParameter : class where TResult : class
+    {
+        public bool IsBusy { get; set; }
+        public bool IsRefreshing { get; set; }
+
+        protected BaseViewModel()
         {
         }
     }

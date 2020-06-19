@@ -1,15 +1,25 @@
 ﻿using System;
-using MvvmCross.ViewModels;
-using PropertyChanged;
+using Acr.UserDialogs;
+using MvvmCross.Navigation;
 
 namespace com.spectrum.UserLog.Core
 {
-    public class UserDetailViewModel : BaseViewModel
+    public class UserDetailViewModel : BaseViewModel<User, ModelResult<User>>
     {
-        public UserModel User { get; set; }
+        private readonly IMvxNavigationService _navigationService;
+        private readonly IUserDialogs _userDialogs;
 
-        public UserDetailViewModel()
+        public User User { get; private set; }
+
+        public UserDetailViewModel(IMvxNavigationService navigationService, IUserDialogs userDialogs)
         {
+            _navigationService = navigationService;
+            _userDialogs = userDialogs;
+        }
+
+        public override void Prepare(User parameter)
+        {
+            User = parameter;
         }
     }
 }

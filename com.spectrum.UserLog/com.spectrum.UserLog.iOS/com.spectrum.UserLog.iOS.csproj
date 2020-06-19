@@ -86,6 +86,15 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MvvmCross" Version="6.4.2" />
+    <PackageReference Include="Cirrious.FluentLayout">
+      <Version>2.9.0</Version>
+    </PackageReference>
+    <PackageReference Include="Acr.UserDialogs">
+      <Version>7.1.0.442</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Essentials">
+      <Version>1.5.3.2</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DebugTrace.cs" />
@@ -94,32 +103,20 @@
     <Compile Include="AppDelegate.cs" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\UserCollection\UserCollectionView.cs" />
-    <Compile Include="Views\UserCollection\UserCollectionView.designer.cs">
-      <DependentUpon>UserCollectionView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UserDetail\UserDetailView.cs" />
-    <Compile Include="Views\UserDetail\UserDetailView.designer.cs">
-      <DependentUpon>UserDetailView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewSource\UserCollectionViewSource.cs" />
     <Compile Include="Cells\UserCollection\UserCollectionViewCell.cs" />
     <Compile Include="Cells\UserCollection\UserCollectionViewCell.designer.cs">
       <DependentUpon>UserCollectionViewCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="Cells\UsersTableViewCell.cs" />
+    <Compile Include="Cells\BaseTableViewCell.cs" />
+    <Compile Include="Views\NetworkIndicatorTargetBinding.cs" />
+    <Compile Include="ViewSource\UsersTableViewSource.cs" />
+    <Compile Include="Views\UsersView.cs" />
+    <Compile Include="Views\UserDetailView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Setup.cs" />
-    <Compile Include="Views\FirstView.designer.cs">
-      <DependentUpon>FirstView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FirstView.cs" />
-    <InterfaceDefinition Include="Views\FirstView.storyboard">
-      <SubType>Designer</SubType>
-    </InterfaceDefinition>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
-    <InterfaceDefinition Include="Views\UserCollection\UserCollectionView.xib" />
-    <InterfaceDefinition Include="Views\UserDetail\UserDetailView.xib" />
     <InterfaceDefinition Include="Cells\UserCollection\UserCollectionViewCell.xib" />
   </ItemGroup>
   <ItemGroup>
@@ -209,11 +206,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\UserCollection\" />
-    <Folder Include="Views\UserDetail\" />
-    <Folder Include="ViewSource\" />
     <Folder Include="Cells\" />
     <Folder Include="Cells\UserCollection\" />
+    <Folder Include="ViewSource\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

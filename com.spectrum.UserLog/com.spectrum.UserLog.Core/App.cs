@@ -1,3 +1,4 @@
+using MvvmCross;
 using MvvmCross.IoC;
 using MvvmCross.ViewModels;
 
@@ -12,7 +13,7 @@ namespace com.spectrum.UserLog.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterAppStart<UserCollectionViewModel>();
+            RegisterAppStart<UsersViewModel>();
         }
     }
 }
