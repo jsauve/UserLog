@@ -46,7 +46,7 @@ namespace com.spectrum.UserLog.Core
                 RaisePropertyChanged(() => FetchUsersTask);
             });
 
-            RefreshUsersCommand = new MvxCommand(RefreshPeople);
+            RefreshUsersCommand = new MvxCommand(RefreshUsers);
         }
 
         public override async Task Initialize()
@@ -100,7 +100,7 @@ namespace com.spectrum.UserLog.Core
             }
         }
 
-        private void RefreshPeople()
+        private void RefreshUsers()
         {
             LoadUsersTask = MvxNotifyTask.Create(LoadUsers);
             RaisePropertyChanged(() => LoadUsersTask);

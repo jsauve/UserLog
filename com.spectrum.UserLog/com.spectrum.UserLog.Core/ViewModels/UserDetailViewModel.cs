@@ -10,7 +10,7 @@ namespace com.spectrum.UserLog.Core
         private readonly IMvxNavigationService _NavigationService;
         private readonly IUserDialogs _UserDialogs;
 
-        public User User { get; private set; }
+        public User UserClone { get; private set; }
 
         private ModelAction ModelAction = ModelAction.Error;
 
@@ -22,9 +22,23 @@ namespace com.spectrum.UserLog.Core
 
         public override void Prepare(User parameter)
         {
-            User = parameter;
+            if (parameter == null)
+                UserClone = new User();
+            else
+            {
+                UserClone = new User
+                {
+                    Id = parameter.Id,
+                    Username = parameter.Username,
+                    FirstName = parameter.FirstName,
+                    LastName = parameter.LastName,
+                    Password = parameter.Password,
+                    CreatedAt = parameter.CreatedAt,
+                    UpdatedAt = parameter.UpdatedAt
+                };
+            }
 
-            if (User?.Id == null)
+            if (UserClone?.Id == null)
                 ModelAction = ModelAction.Create;
             else
                 ModelAction = ModelAction.Update;
@@ -37,14 +51,14 @@ namespace com.spectrum.UserLog.Core
 
         public async Task Save()
         {
-            var result = new ModelResult<User>(User, ModelAction);
+            var result = new ModelResult<User>(UserClone, ModelAction);
 
             await _NavigationService.Close(this, result);
         }
 
         public async Task Delete()
         {
-            var result = new ModelResult<User>(User, ModelAction.Delete);
+            var result = new ModelResult<User>(UserClone, ModelAction.Delete);
 
             await _NavigationService.Close(this, result);
         }

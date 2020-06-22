@@ -60,5 +60,12 @@ namespace com.spectrum.UserLog.iOS
 
             set.Apply();
         }
+
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+
+            ViewModel.RefreshUsersCommand.Execute();
+        }
     }
 }

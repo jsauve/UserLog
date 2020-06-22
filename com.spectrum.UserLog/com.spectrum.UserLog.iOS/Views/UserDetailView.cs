@@ -199,10 +199,10 @@ namespace com.spectrum.UserLog.iOS
                 );
 
             var set = this.CreateBindingSet<UserDetailView, UserDetailViewModel>();
-            set.Bind().For(x => x.Title).To(x => x.User.DisplayName);
-            set.Bind(UsernameField).For(x => x.Text).To(x => x.User.Username);
-            set.Bind(FirstNameField).For(x => x.Text).To(x => x.User.FirstName);
-            set.Bind(LastNameField).For(x => x.Text).To(x => x.User.LastName);
+            set.Bind().For(x => x.Title).To(x => x.UserClone.DisplayName);
+            set.Bind(UsernameField).For(x => x.Text).To(x => x.UserClone.Username);
+            set.Bind(FirstNameField).For(x => x.Text).To(x => x.UserClone.FirstName);
+            set.Bind(LastNameField).For(x => x.Text).To(x => x.UserClone.LastName);
             set.Apply();
         }
 
