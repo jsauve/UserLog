@@ -79,7 +79,7 @@ namespace com.spectrum.UserLog.Core
         {
             if (result != null)
             {
-                switch (result.Action)
+                switch (result.ModelAction)
                 {
                     case ModelAction.Create:
                         var createdUser = await _UsersService.Create(result.Model);
@@ -87,7 +87,8 @@ namespace com.spectrum.UserLog.Core
                         break;
                     case ModelAction.Update:
                         var updatedUser = await _UsersService.Update(result.Model);
-                        await _passwordStorageService.Store(updatedUser.Id, updatedUser.Password);
+                        if (!string.IsNullOrWhiteSpace(result.Model.Password))
+                            await _passwordStorageService.Store(updatedUser.Id, result.Model.Password);
                         break;
                     case ModelAction.Delete:
                         await _UsersService.Delete(result.Model.Id);

@@ -1,5 +1,6 @@
 ﻿using System;
 using Cirrious.FluentLayouts.Touch;
+using com.spectrum.UserLog.Core;
 using MvvmCross.Binding.BindingContext;
 using UIKit;
 
@@ -9,7 +10,8 @@ namespace com.spectrum.UserLog.iOS
     {
         private const float PADDING = 12f;
 
-        private UILabel _lblName;
+        public UILabel NameLabel { get; private set; }
+        public UILabel UsernameLabel { get; private set; }
 
         public UsersTableViewCell(IntPtr handle) : base(handle)
         {
@@ -21,20 +23,28 @@ namespace com.spectrum.UserLog.iOS
 
             SelectionStyle = UITableViewCellSelectionStyle.None;
 
-            _lblName = new UILabel
+            NameLabel = new UILabel
             {
                 TextColor = UIColor.Black,
                 Font = UIFont.SystemFontOfSize(15f, UIFontWeight.Bold)
             };
 
+            UsernameLabel = new UILabel
+            {
+                TextColor = UIColor.Gray,
+                Font = UIFont.SystemFontOfSize(14f)
+            };
+
             BackgroundColor = UIColor.Clear;
-            ContentView.AddSubview(_lblName);
+            ContentView.AddSubviews(
+                UsernameLabel,
+                NameLabel);
             ContentView.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
 
-            this.DelayBind(() =>
-            {
-                this.AddBindings(_lblName, "DisplayName");
-            });
+            var set = this.CreateBindingSet<UsersTableViewCell, User>();
+            set.Bind(NameLabel).For(x => x.Text).To(x => x.DisplayName);
+            set.Bind(UsernameLabel).For(x => x.Text).To(x => x.Username);
+            set.Apply();
         }
 
         protected override void CreateConstraints()
@@ -42,10 +52,13 @@ namespace com.spectrum.UserLog.iOS
             base.CreateConstraints();
 
             ContentView.AddConstraints(
-                _lblName.AtLeftOf(ContentView, PADDING),
-                _lblName.AtTopOf(ContentView, PADDING),
-                _lblName.AtBottomOf(ContentView, PADDING),
-                _lblName.AtRightOf(ContentView, PADDING)
+                NameLabel.AtLeftOf(ContentView, PADDING),
+                NameLabel.AtTopOf(ContentView, PADDING),
+                NameLabel.AtRightOf(ContentView, PADDING),
+                UsernameLabel.AtLeftOf(NameLabel, 0),
+                UsernameLabel.AtBottomOf(NameLabel, -PADDING-(PADDING/2)),
+                UsernameLabel.AtBottomOf(ContentView, PADDING),
+                UsernameLabel.AtRightOf(NameLabel, 0)
             );
         }
     }

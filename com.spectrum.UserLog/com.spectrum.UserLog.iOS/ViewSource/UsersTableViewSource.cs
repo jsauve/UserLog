@@ -19,9 +19,6 @@ namespace com.spectrum.UserLog.iOS
         {
             var cell = base.GetOrCreateCellFor(tableView, indexPath, item);
 
-            //if (indexPath.Item == ItemsSource.Count() - 5)
-            //    FetchCommand?.Execute(null);
-
             return cell;
         }
     }

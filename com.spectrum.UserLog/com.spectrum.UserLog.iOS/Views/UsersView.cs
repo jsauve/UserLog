@@ -23,10 +23,12 @@ namespace com.spectrum.UserLog.iOS
 
             _refreshControl = new MvxUIRefreshControl();
 
-            _tableView = new UITableView();
-            _tableView.BackgroundColor = UIColor.White;
-            _tableView.RowHeight = UITableView.AutomaticDimension;
-            _tableView.EstimatedRowHeight = 44f;
+            _tableView = new UITableView
+            {
+                BackgroundColor = UIColor.White,
+                RowHeight = UITableView.AutomaticDimension,
+                EstimatedRowHeight = 44f
+            };
             _tableView.AddSubview(_refreshControl);
 
             _source = new UsersTableViewSource(_tableView);

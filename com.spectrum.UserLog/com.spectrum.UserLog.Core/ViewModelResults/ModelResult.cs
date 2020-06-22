@@ -5,6 +5,12 @@ namespace com.spectrum.UserLog.Core
     {
         public TModel Model { get; set; }
 
-        public ModelAction Action { get; set; }
+        public ModelAction ModelAction { get; set; }
+
+        public ModelResult(TModel model, ModelAction modelAction)
+        {
+            Model = model;
+            ModelAction = modelAction;
+        }
     }
 }

@@ -1,3 +1,4 @@
+using Acr.UserDialogs;
 using MvvmCross;
 using MvvmCross.IoC;
 using MvvmCross.ViewModels;
@@ -12,6 +13,8 @@ namespace com.spectrum.UserLog.Core
                 .EndingWith("Service")
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
+
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton(() => UserDialogs.Instance);
 
             RegisterAppStart<UsersViewModel>();
         }

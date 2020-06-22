@@ -10,6 +10,9 @@ namespace com.spectrum.UserLog.Core
         public string Password { get; set; }
         public string FirstName { get; set; } 
         public string LastName { get; set; }
+        public DateTimeOffset CreatedAt { get; set; }
+        public DateTimeOffset UpdatedAt { get; set; }
+        [JsonIgnore]
         public string DisplayName => $"{LastName}, {FirstName}";
     }
 }
