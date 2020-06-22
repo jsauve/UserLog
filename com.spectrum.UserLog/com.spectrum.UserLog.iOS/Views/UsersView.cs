@@ -47,6 +47,7 @@ namespace com.spectrum.UserLog.iOS
             View.BringSubviewToFront(_tableView);
 
             var set = this.CreateBindingSet<UsersView, UsersViewModel>();
+            set.Bind(this).For(x => x.Title).To(vm => vm.Title);
             set.Bind(this).For("NetworkIndicator").To(vm => vm.FetchUsersTask.IsNotCompleted).WithFallback(false);
             set.Bind(_refreshControl).For(r => r.IsRefreshing).To(vm => vm.LoadUsersTask.IsNotCompleted).WithFallback(false);
             set.Bind(_refreshControl).For(r => r.RefreshCommand).To(vm => vm.RefreshUsersCommand);

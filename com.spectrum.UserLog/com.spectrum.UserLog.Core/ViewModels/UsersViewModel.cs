@@ -8,6 +8,8 @@ namespace com.spectrum.UserLog.Core
 {
     public class UsersViewModel : BaseViewModel
     {
+        public string Title { get; set; } = "Users";
+
         private readonly IModelService<User> _UsersService;
 
         private readonly IMvxNavigationService _navigationService;
