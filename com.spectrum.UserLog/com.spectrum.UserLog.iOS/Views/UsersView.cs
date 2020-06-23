@@ -1,5 +1,4 @@
-﻿using System;
-using Cirrious.FluentLayouts.Touch;
+﻿using Cirrious.FluentLayouts.Touch;
 using com.spectrum.UserLog.Core;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Views;
@@ -9,62 +8,58 @@ namespace com.spectrum.UserLog.iOS
 {
     public class UsersView : MvxViewController<UsersViewModel>
     {
-        private MvxUIRefreshControl _refreshControl;
-        private UITableView _tableView;
-        private UIBarButtonItem _newButton;
-        private UsersTableViewSource _source;
+        private MvxUIRefreshControl _RefreshControl;
+        private UITableView _TableView;
+        private UIBarButtonItem _NewButton;
+        private UsersTableViewSource _Source;
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
 
-            _newButton = new UIBarButtonItem(UIBarButtonSystemItem.Add);
-            NavigationItem.RightBarButtonItem = _newButton;
+            _NewButton = new UIBarButtonItem(UIBarButtonSystemItem.Add);
+            NavigationItem.RightBarButtonItem = _NewButton;
 
-            _refreshControl = new MvxUIRefreshControl();
+            _RefreshControl = new MvxUIRefreshControl();
 
-            _tableView = new UITableView
+            _TableView = new UITableView
             {
                 BackgroundColor = UIColor.White,
                 RowHeight = UITableView.AutomaticDimension,
                 EstimatedRowHeight = 44f
             };
-            _tableView.AddSubview(_refreshControl);
+            _TableView.AddSubview(_RefreshControl);
 
-            _source = new UsersTableViewSource(_tableView);
-            _tableView.Source = _source;
+            _Source = new UsersTableViewSource(_TableView);
+            _TableView.Source = _Source;
 
-            View.AddSubviews(_tableView);
+            View.AddSubviews(_TableView);
             View.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
 
             View.AddConstraints(
-                _tableView.AtLeftOf(View),
-                _tableView.AtTopOf(View),
-                _tableView.AtBottomOf(View),
-                _tableView.AtRightOf(View)
+                _TableView.AtLeftOf(View),
+                _TableView.AtTopOf(View),
+                _TableView.AtBottomOf(View),
+                _TableView.AtRightOf(View)
             );
 
-            View.BringSubviewToFront(_tableView);
+            View.BringSubviewToFront(_TableView);
 
             var set = this.CreateBindingSet<UsersView, UsersViewModel>();
             set.Bind(this).For(x => x.Title).To(vm => vm.Title);
             set.Bind(this).For("NetworkIndicator").To(vm => vm.FetchUsersTask.IsNotCompleted).WithFallback(false);
-            set.Bind(_refreshControl).For(r => r.IsRefreshing).To(vm => vm.LoadUsersTask.IsNotCompleted).WithFallback(false);
-            set.Bind(_refreshControl).For(r => r.RefreshCommand).To(vm => vm.RefreshUsersCommand);
-            set.Bind(_newButton).To(vm => vm.CreateNewUserCommand);
-
-
-            set.Bind(_source).For(v => v.ItemsSource).To(vm => vm.Users);
-            set.Bind(_source).For(v => v.SelectionChangedCommand).To(vm => vm.UserSelectedCommand);
-            set.Bind(_source).For(v => v.FetchCommand).To(vm => vm.FetchUsersCommand);
-
+            set.Bind(_RefreshControl).For(r => r.IsRefreshing).To(vm => vm.LoadUsersTask.IsNotCompleted).WithFallback(false);
+            set.Bind(_RefreshControl).For(r => r.RefreshCommand).To(vm => vm.RefreshUsersCommand);
+            set.Bind(_NewButton).To(vm => vm.CreateNewUserCommand);
+            set.Bind(_Source).For(v => v.ItemsSource).To(vm => vm.Users);
+            set.Bind(_Source).For(v => v.SelectionChangedCommand).To(vm => vm.UserSelectedCommand);
+            set.Bind(_Source).For(v => v.FetchCommand).To(vm => vm.FetchUsersCommand);
             set.Apply();
         }
 
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
-
             ViewModel.RefreshUsersCommand.Execute();
         }
     }

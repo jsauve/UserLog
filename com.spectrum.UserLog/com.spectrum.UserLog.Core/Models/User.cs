@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace com.spectrum.UserLog.Core
 {
-    public class User : BaseModel
+    public class User : BaseModel, ICloneable
     {
         public string Username { get; set; }
         [JsonIgnore]
@@ -13,6 +13,8 @@ namespace com.spectrum.UserLog.Core
         public DateTimeOffset CreatedAt { get; set; }
         public DateTimeOffset UpdatedAt { get; set; }
         [JsonIgnore]
-        public string DisplayName => $"{LastName}, {FirstName}";
+        public string DisplayName => $"{LastName}{((!string.IsNullOrWhiteSpace(LastName) && !string.IsNullOrWhiteSpace(FirstName)) ? ", " : "")}{FirstName}";
+
+        public object Clone() => MemberwiseClone();
     }
 }

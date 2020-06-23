@@ -1,6 +1,5 @@
-﻿using System;
-using System.Windows.Input;
-using MvvmCross.Binding.Extensions;
+﻿using System.Windows.Input;
+using Foundation;
 using MvvmCross.Platforms.Ios.Binding.Views;
 using UIKit;
 
@@ -15,9 +14,11 @@ namespace com.spectrum.UserLog.iOS
             DeselectAutomatically = true;
         }
 
-        protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, Foundation.NSIndexPath indexPath, object item)
+        public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
-            var cell = base.GetOrCreateCellFor(tableView, indexPath, item);
+            var cell = base.GetCell(tableView, indexPath);
+
+            cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
 
             return cell;
         }

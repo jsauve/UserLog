@@ -14,8 +14,6 @@ namespace com.spectrum.UserLog.Core
 
         private readonly IMvxNavigationService _navigationService;
 
-        private readonly IPasswordStorageService _passwordStorageService;
-
         public MvxObservableCollection<User> Users { get; set; } = new MvxObservableCollection<User>();
 
         public MvxNotifyTask LoadUsersTask { get; private set; }
@@ -30,11 +28,12 @@ namespace com.spectrum.UserLog.Core
 
         public IMvxCommand RefreshUsersCommand { get; private set; }
 
-        public UsersViewModel(IModelService<User> usersService, IMvxNavigationService navigationService, IPasswordStorageService passwordStorageService)
+        public UsersViewModel(
+            IModelService<User> usersService,
+            IMvxNavigationService navigationService)
         {
             _UsersService = usersService;
             _navigationService = navigationService;
-            _passwordStorageService = passwordStorageService;
 
             UserSelectedCommand = new MvxAsyncCommand<User>(UserSelected);
 
@@ -65,39 +64,12 @@ namespace com.spectrum.UserLog.Core
 
         private async Task UserSelected(User user)
         {
-            var result = await _navigationService.Navigate<UserDetailViewModel, User, ModelResult<User>>(user);
-
-            await HandleModelResult(result);
+            await _navigationService.Navigate<UserDetailViewModel, User>(user);
         }
 
         private async Task CreateNewUser()
         {
-            var result = await _navigationService.Navigate<UserDetailViewModel, User, ModelResult<User>>(null);
-
-            await HandleModelResult(result);
-        }
-
-        private async Task HandleModelResult(ModelResult<User> result)
-        {
-            if (result != null)
-            {
-                switch (result.ModelAction)
-                {
-                    case ModelAction.Create:
-                        var createdUser = await _UsersService.Create(result.Model);
-                        await _passwordStorageService.Store(createdUser.Id, createdUser.Password);
-                        break;
-                    case ModelAction.Update:
-                        var updatedUser = await _UsersService.Update(result.Model);
-                        if (!string.IsNullOrWhiteSpace(result.Model.Password))
-                            await _passwordStorageService.Store(updatedUser.Id, result.Model.Password);
-                        break;
-                    case ModelAction.Delete:
-                        await _UsersService.Delete(result.Model.Id);
-                        _passwordStorageService.Delete(result.Model.Id);
-                        break;
-                }
-            }
+            await _navigationService.Navigate<UserDetailViewModel>();
         }
 
         private void RefreshUsers()

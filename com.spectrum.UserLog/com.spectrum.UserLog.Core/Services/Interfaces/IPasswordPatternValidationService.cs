@@ -5,6 +5,6 @@ namespace com.spectrum.UserLog.Core
 {
     public interface IPasswordPatternValidationService
     {
-        Task<PasswordValidationResult> Validate(string password);
+        PasswordValidationResult Validate(string password);
     }
 }

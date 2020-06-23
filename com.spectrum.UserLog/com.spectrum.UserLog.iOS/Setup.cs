@@ -12,13 +12,6 @@ namespace com.spectrum.UserLog.iOS
 {
     public class Setup : MvxIosSetup<App>
     {
-        protected override void InitializeFirstChance()
-        {
-            base.InitializeFirstChance();
-
-            //Mvx.IoCProvider.RegisterType<IMvxJsonConverter, MvxJsonConverter>();
-        }
-
         protected override void InitializeLastChance()
         {
             base.InitializeLastChance();
@@ -29,7 +22,7 @@ namespace com.spectrum.UserLog.iOS
 
         protected override IMvxApplication CreateApp()
         {
-            return new Core.App();
+            return new App();
         }
 
         protected override IMvxIocOptions CreateIocOptions()

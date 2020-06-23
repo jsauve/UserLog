@@ -5,7 +5,7 @@ namespace com.spectrum.UserLog.iOS
 {
     public abstract class BaseTableViewCell : MvxTableViewCell
     {
-        private bool _didSetupConstraints;
+        private bool _DidSetupConstraints;
 
         public BaseTableViewCell(IntPtr handle) : base(handle)
         {
@@ -21,12 +21,12 @@ namespace com.spectrum.UserLog.iOS
 
         public override sealed void UpdateConstraints()
         {
-            if (!_didSetupConstraints)
+            if (!_DidSetupConstraints)
             {
                 CreateConstraints();
-
-                _didSetupConstraints = true;
+                _DidSetupConstraints = true;
             }
+
             base.UpdateConstraints();
         }
 

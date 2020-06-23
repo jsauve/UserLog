@@ -1,5 +1,4 @@
-﻿using System;
-using MvvmCross.ViewModels;
+﻿using MvvmCross.ViewModels;
 using PropertyChanged;
 
 namespace com.spectrum.UserLog.Core
@@ -7,22 +6,10 @@ namespace com.spectrum.UserLog.Core
     [AddINotifyPropertyChangedInterface]
     public abstract class BaseViewModel : MvxViewModel
     {
-        public bool IsBusy { get; set; }
-        public bool IsRefreshing { get; set; }
-
-        protected BaseViewModel()
-        {
-        }
     }
 
     [AddINotifyPropertyChangedInterface]
-    public abstract class BaseViewModel<TParameter, TResult> : MvxViewModel<TParameter, TResult> where TParameter : class where TResult : class
+    public abstract class BaseViewModel<TParameter> : MvxViewModel<TParameter> where TParameter : BaseModel
     {
-        public bool IsBusy { get; set; }
-        public bool IsRefreshing { get; set; }
-
-        protected BaseViewModel()
-        {
-        }
     }
 }

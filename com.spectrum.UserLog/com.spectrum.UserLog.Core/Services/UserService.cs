@@ -10,16 +10,19 @@ namespace com.spectrum.UserLog.Core
 {
     public class UsersService : IModelService<User>
     {
-        private string _FilePath => Path.Combine(FileSystem.AppDataDirectory, "users.json");
+        private string _FilePath => Path.Combine(FileSystem.AppDataDirectory, $"users.json");
 
         public async Task<User> Create(User user)
         {
-            if (user.Id != null)
-                throw new ArgumentException($"A new {nameof(User)} must have a null Id. An Id will be created automatically.");
+            if (user == null)
+                throw new ArgumentException($"{nameof(User)} may not be null.");
 
-            user.Id = Guid.NewGuid();
+            if (!user.Id.Equals(Guid.Empty))
+                throw new ArgumentException($"A new {nameof(User)} must have an empty Guid Id.");
 
             var users = await Read();
+
+            user.Id = Guid.NewGuid();
 
             users.Add(user);
 
@@ -36,11 +39,14 @@ namespace com.spectrum.UserLog.Core
 
             var users = JsonConvert.DeserializeObject<IList<User>>(json);
 
-            return users;
+            return users.OrderBy(x => x.LastName).ToList();
         }
 
         public async Task<User> Read(Guid id)
         {
+            if (id == Guid.Empty)
+                throw new ArgumentException($"{nameof(id)} may not be empty");
+
             var users = await Read();
 
             return users.FirstOrDefault(x => x.Id == id);
@@ -48,6 +54,12 @@ namespace com.spectrum.UserLog.Core
 
         public async Task<User> Update(User user)
         {
+            if (user == null)
+                throw new ArgumentException($"{nameof(User)} may not be null.");
+
+            if (user.Id == null || user.Id == Guid.Empty)
+                throw new ArgumentException($"{nameof(User)} may not have a null or empty Id.");
+
             await Delete(user.Id);
 
             var users = await Read();
@@ -61,6 +73,9 @@ namespace com.spectrum.UserLog.Core
 
         public async Task Delete(Guid id)
         {
+            if (id == Guid.Empty)
+                throw new ArgumentException($"{nameof(id)} may not be empty");
+
             var users = await Read();
 
             var existing = users.ToList().Find(x => x.Id == id);
