@@ -12540,6 +12540,12 @@ namespace com.spectrum.UserLog.Droid
 			// aapt resource value: 0x7F0C0046
 			public const int toolbar = 2131492934;
 			
+			// aapt resource value: 0x7F0C0047
+			public const int UserDetailView = 2131492935;
+			
+			// aapt resource value: 0x7F0C0048
+			public const int UsersView = 2131492936;
+			
 			static Layout()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
