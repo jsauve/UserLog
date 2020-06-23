@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace com.spectrum.UserLog.Core
 {
-    public class User : BaseModel, ICloneable
+    public class UserModel : BaseModel, ICloneable
     {
         public string Username { get; set; }
         [JsonIgnore]

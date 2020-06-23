@@ -10,17 +10,17 @@ namespace com.spectrum.UserLog.Core
     {
         public string Title { get; set; } = "Users";
 
-        private readonly IModelService<User> _UsersService;
+        private readonly IModelService<UserModel> _UsersService;
 
         private readonly IMvxNavigationService _navigationService;
 
-        public MvxObservableCollection<User> Users { get; set; } = new MvxObservableCollection<User>();
+        public MvxObservableCollection<UserModel> Users { get; set; } = new MvxObservableCollection<UserModel>();
 
         public MvxNotifyTask LoadUsersTask { get; private set; }
 
         public MvxNotifyTask FetchUsersTask { get; private set; }
 
-        public IMvxCommand<User> UserSelectedCommand { get; private set; }
+        public IMvxCommand<UserModel> UserSelectedCommand { get; private set; }
 
         public IMvxCommand CreateNewUserCommand { get; private set; }
 
@@ -29,13 +29,13 @@ namespace com.spectrum.UserLog.Core
         public IMvxCommand RefreshUsersCommand { get; private set; }
 
         public UsersViewModel(
-            IModelService<User> usersService,
+            IModelService<UserModel> usersService,
             IMvxNavigationService navigationService)
         {
             _UsersService = usersService;
             _navigationService = navigationService;
 
-            UserSelectedCommand = new MvxAsyncCommand<User>(UserSelected);
+            UserSelectedCommand = new MvxAsyncCommand<UserModel>(UserSelected);
 
             CreateNewUserCommand = new MvxAsyncCommand(CreateNewUser);
 
@@ -62,9 +62,9 @@ namespace com.spectrum.UserLog.Core
             Users.AddRange(users);
         }
 
-        private async Task UserSelected(User user)
+        private async Task UserSelected(UserModel user)
         {
-            await _navigationService.Navigate<UserDetailViewModel, User>(user);
+            await _navigationService.Navigate<UserDetailViewModel, UserModel>(user);
         }
 
         private async Task CreateNewUser()

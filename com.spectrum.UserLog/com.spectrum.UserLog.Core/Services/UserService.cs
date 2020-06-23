@@ -8,17 +8,17 @@ using Xamarin.Essentials;
 
 namespace com.spectrum.UserLog.Core
 {
-    public class UsersService : IModelService<User>
+    public class UsersService : IModelService<UserModel>
     {
         private string _FilePath => Path.Combine(FileSystem.AppDataDirectory, $"users.json");
 
-        public async Task<User> Create(User user)
+        public async Task<UserModel> Create(UserModel user)
         {
             if (user == null)
-                throw new ArgumentException($"{nameof(User)} may not be null.");
+                throw new ArgumentException($"{nameof(UserModel)} may not be null.");
 
             if (!user.Id.Equals(Guid.Empty))
-                throw new ArgumentException($"A new {nameof(User)} must have an empty Guid Id.");
+                throw new ArgumentException($"A new {nameof(UserModel)} must have an empty Guid Id.");
 
             var users = await Read();
 
@@ -31,18 +31,18 @@ namespace com.spectrum.UserLog.Core
             return user;
         }
 
-        public async Task<IList<User>> Read()
+        public async Task<IList<UserModel>> Read()
         {
             await EnsureFileExists();
 
             var json = File.ReadAllText(_FilePath);
 
-            var users = JsonConvert.DeserializeObject<IList<User>>(json);
+            var users = JsonConvert.DeserializeObject<IList<UserModel>>(json);
 
             return users.OrderBy(x => x.LastName).ToList();
         }
 
-        public async Task<User> Read(Guid id)
+        public async Task<UserModel> Read(Guid id)
         {
             if (id == Guid.Empty)
                 throw new ArgumentException($"{nameof(id)} may not be empty");
@@ -52,13 +52,13 @@ namespace com.spectrum.UserLog.Core
             return users.FirstOrDefault(x => x.Id == id);
         }
 
-        public async Task<User> Update(User user)
+        public async Task<UserModel> Update(UserModel user)
         {
             if (user == null)
-                throw new ArgumentException($"{nameof(User)} may not be null.");
+                throw new ArgumentException($"{nameof(UserModel)} may not be null.");
 
             if (user.Id == null || user.Id == Guid.Empty)
-                throw new ArgumentException($"{nameof(User)} may not have a null or empty Id.");
+                throw new ArgumentException($"{nameof(UserModel)} may not have a null or empty Id.");
 
             await Delete(user.Id);
 
@@ -81,7 +81,7 @@ namespace com.spectrum.UserLog.Core
             var existing = users.ToList().Find(x => x.Id == id);
 
             if (existing == null)
-                throw new ArgumentException($"No existing {nameof(User)} found with Id {id}");
+                throw new ArgumentException($"No existing {nameof(UserModel)} found with Id {id}");
 
             users.Remove(existing);
 

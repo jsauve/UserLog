@@ -41,7 +41,7 @@ namespace com.spectrum.UserLog.iOS
                 NameLabel);
             ContentView.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
 
-            var set = this.CreateBindingSet<UsersTableViewCell, User>();
+            var set = this.CreateBindingSet<UsersTableViewCell, UserModel>();
             set.Bind(NameLabel).For(x => x.Text).To(x => x.DisplayName);
             set.Bind(UsernameLabel).For(x => x.Text).To(x => x.Username);
             set.Apply();

@@ -8,15 +8,15 @@ using MvvmCross.Navigation;
 
 namespace com.spectrum.UserLog.Core
 {
-    public class UserDetailViewModel : BaseViewModel<User>
+    public class UserDetailViewModel : BaseViewModel<UserModel>
     {
         private readonly IMvxNavigationService _NavigationService;
         private readonly IUserDialogs _UserDialogs;
-        private readonly IModelService<User> _UsersService;
+        private readonly IModelService<UserModel> _UsersService;
         private readonly IPasswordPatternValidationService _PasswordPatternValidationService;
         private readonly IPasswordStorageService _PasswordStorageService;
 
-        public User UserClone { get; private set; }
+        public UserModel UserClone { get; private set; }
 
         public string NewPassword { get; set; }
         public string NewPasswordVerify { get; set; }
@@ -26,7 +26,7 @@ namespace com.spectrum.UserLog.Core
         public UserDetailViewModel(
             IMvxNavigationService navigationService,
             IUserDialogs userDialogs,
-            IModelService<User> usersService,
+            IModelService<UserModel> usersService,
             IPasswordPatternValidationService passwordPatternValidationService,
             IPasswordStorageService passwordStorageService)
         {
@@ -39,20 +39,20 @@ namespace com.spectrum.UserLog.Core
 
         public override void Prepare()
         {
-            UserClone = new User();
+            UserClone = new UserModel();
             IsNew = true;
         }
 
-        public override void Prepare(User parameter)
+        public override void Prepare(UserModel parameter)
         {
             if (parameter == null || parameter.Id == Guid.Empty)
             {
-                UserClone = new User();
+                UserClone = new UserModel();
                 IsNew = true;
             }
             else
             {
-                UserClone = parameter.Clone() as User;
+                UserClone = parameter.Clone() as UserModel;
                 IsNew = false;
             }
         }
