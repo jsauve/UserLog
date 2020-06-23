@@ -7,6 +7,8 @@ Demo app for job application
 - iOS only
     - Android platform project underway, but not necessary according to requirements
 - Users are stored as local JSON
-- Passwords are validated
+- Passwords are validated and persisted to secure storage
 - Edit/Delete of Users is supported
 - Unit tests are included for password validation
+
+![screenshots](UserLog.jpg)
